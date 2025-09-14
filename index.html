@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manguan Sports - Trang Landing Page</title>
+    <!-- Tích hợp Tailwind CSS -->
+    <!--<script src="https://cdn.tailwindcss.com"></script>-->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Tích hợp Font Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Áp dụng font Noto Sans SC cho toàn bộ trang */
+      body {
+        font-family: "Noto Sans SC", sans-serif;
+        background-color: #111827; /* Màu nền xám đậm (Gray 900) */
+        color: #d1d5db; /* Màu chữ xám nhạt */
+      }
+
+      /* Hiệu ứng bong bóng nền */
+      #background-bubbles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
+
+      .bubble {
+        position: absolute;
+        bottom: -150px;
+        background-color: rgba(
+          59,
+          130,
+          246,
+          0.05
+        ); /* Màu bong bóng xanh dương rất nhạt */
+        border-radius: 50%;
+        animation: moveBubbles 35s linear infinite;
+      }
+
+      @keyframes moveBubbles {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        100% {
+          transform: translateY(-120vh) rotate(360deg);
+        }
+      }
+
+      /* Nút màu xanh dương gradient */
+      .btn-gradient-blue {
+        background-image: linear-gradient(to top, #1d4ed8, #3b82f6);
+        color: white;
+        transition: all 0.2s ease;
+        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+          0 4px 15px rgba(59, 130, 246, 0.25);
+        border-radius: 9999px;
+      }
+      .btn-gradient-blue:hover {
+        transform: translateY(-2px);
+        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+          0 8px 20px rgba(59, 130, 246, 0.3);
+      }
+
+      /* Nút màu xanh lá cây gradient */
+      .btn-gradient-green {
+        background-image: linear-gradient(to top, #16a34a, #22c55e);
+        color: white;
+        transition: all 0.2s ease;
+        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+          0 4px 15px rgba(34, 197, 94, 0.25);
+        border-radius: 9999px;
+      }
+      .btn-gradient-green:hover {
+        transform: translateY(-2px);
+        box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2),
+          0 8px 20px rgba(34, 197, 94, 0.3);
+      }
+
+      /* Hiệu ứng đổ bóng & nền mờ cho các card */
+      .card-shadow {
+        background-color: rgba(31, 41, 55, 0.5); /* Màu nền xám đậm mờ */
+        backdrop-filter: blur(8px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+      }
+
+      /* Nền lưới cho khu vực CTA chính */
+      .grid-background {
+        background-color: rgba(31, 41, 55, 0.3);
+        backdrop-filter: blur(4px);
+        background-image: linear-gradient(
+            rgba(107, 114, 128, 0.2) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            to right,
+            rgba(107, 114, 128, 0.2) 1px,
+            transparent 1px
+          );
+        background-size: 25px 25px;
+      }
+
+      /* Dòng chữ chạy */
+      @keyframes marquee {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+      .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .animate-marquee {
+        display: inline-block;
+        animation: marquee 25s linear infinite;
+        padding-left: 100%;
+      }
+
+      /* Hình dạng banner cho logo chính */
+      .logo-banner {
+        position: relative;
+      }
+      .logo-banner::before,
+      .logo-banner::after {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 12px;
+        background-color: #000;
+        top: -1px;
+        z-index: -1;
+      }
+      .logo-banner::before {
+        left: 20px;
+        transform: skewX(-40deg);
+      }
+      .logo-banner::after {
+        right: 20px;
+        transform: skewX(40deg);
+      }
+    </style>
+  </head>
+  <body class="text-gray-200">
+    <!-- Hiệu ứng bong bóng nền -->
+    <div id="background-bubbles"></div>
+
+    <div class="container mx-auto p-4 md:p-8 max-w-5xl">
+      <!-- Header -->
+      <header class="text-center py-4">
+        <div
+          class="inline-flex items-center gap-2 text-blue-400 text-lg font-bold mb-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.08c-2.03.12-3.93-.7-5.34-2.11-.19-.19-.29-.44-.29-.71s.1-.52.29-.71c.39-.39 1.02-.39 1.41 0 1.23 1.23 3.21 1.48 4.72.64.53-.3 1.17.11 1.17.72v1.17c0 .27-.22.5-.5.5-.16 0-.32-.08-.41-.21zM12 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm5.71 6.29c.39.39.39 1.02 0 1.41-.19-.19-.44.29-.71.29s-.52-.1-.71-.29c-1.23-1.23-3.21-1.48-4.72-.64-.53.3-1.17-.11-1.17-.72V13.5c0-.28.22-.5.5-.5.16 0 .32.08.41.21 2.03-.12 3.93.7 5.34 2.11z"
+            />
+          </svg>
+          <span>满冠体育</span>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-100">实力赞助·旗舰优选</h1>
+      </header>
+
+      <!-- Banner Slider Section -->
+      <section class="mb-12">
+        <div
+          id="slider-container"
+          class="relative bg-gray-800 rounded-2xl shadow-2xl overflow-hidden p-4"
+        >
+          <img
+            id="slider-image"
+            src="/img/banners/3.jpg"
+            alt="Banner Quảng cáo"
+            class="w-full h-full object-cover rounded-xl transition-opacity duration-500"
+          />
+
+          <!-- Navigation Arrows -->
+          <button
+            id="prev-slide"
+            class="absolute left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <button
+            id="next-slide"
+            class="absolute right-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+
+          <!-- Pagination Dots -->
+          <div
+            id="slider-dots"
+            class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2"
+          >
+            <!-- Dots will be generated by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Hộp kêu gọi hành động chính -->
+      <section
+        data-link-key="mg"
+        class="grid-background rounded-2xl pt-8 pb-4 mb-8 text-center card-shadow relative"
+      >
+        <div class="flex justify-center -mt-20">
+          <div class="logo-banner">
+            <div class="bg-[#2a3447] p-3 rounded-2xl shadow-lg inline-block">
+              <img
+                src="/img/mglogo-white.png"
+                alt="Manguan Logo"
+                class="h-14"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mt-6 px-4">
+          <a
+            href="#"
+            target="_blank"
+            class="web-link btn-gradient-blue font-medium py-3 px-10 text-lg"
+          >
+            点击进入网页 →
+          </a>
+          <a
+            href="#"
+            target="_blank"
+            class="app-link btn-gradient-green font-medium py-3 px-10 text-lg"
+          >
+            全站APP下载 →
+          </a>
+        </div>
+        <div class="marquee-container mt-4 text-gray-400 text-xs">
+          <p class="animate-marquee">
+            国际品牌-凤凰国际-全站福利-首存加送1888-行业最高首存返利
+          </p>
+        </div>
+      </section>
+
+      <!-- Lưới các đối tác -->
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <!-- Card 1: Kaiyun Sports -->
+        <div data-link-key="kaiyun" class="card-shadow p-4 flex flex-col">
+          <div class="flex items-center gap-4 flex-grow">
+            <div
+              class="bg-gray-200 rounded-lg p-2 w-2/5 flex justify-center items-center self-stretch shadow-inner"
+            >
+              <img
+                src="/img/kaiyunlogo.png"
+                alt="Kaiyun Logo"
+                class="h-14"
+              />
+            </div>
+            <div class="w-3/5 flex flex-col gap-3">
+              <h3 class="text-xl font-bold text-left text-gray-100">
+                开云体育
+              </h3>
+              <a
+                href="#"
+                target="_blank"
+                class="web-link text-center btn-gradient-blue font-medium py-2 px-4"
+                >点击进入网页 →</a
+              >
+              <a
+                href="#"
+                target="_blank"
+                class="app-link text-center btn-gradient-green font-medium py-2 px-4"
+                >全站APP下载 →</a
+              >
+            </div>
+          </div>
+          <div class="marquee-container mt-3 text-gray-400 text-xs">
+            <p class="animate-marquee">
+              效率提升150% 皇家马德里-官方合作伙伴-全返利 限时回归 彩金天天送
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 2: Leyu Sports -->
+        <div data-link-key="leyu" class="card-shadow p-4 flex flex-col">
+          <div class="flex items-center gap-4 flex-grow">
+            <div
+              class="bg-gray-200 rounded-lg p-2 w-2/5 flex justify-center items-center self-stretch shadow-inner"
+            >
+              <img
+                src="/img/leyulogo.png"
+                alt="Leyu Logo"
+                class="h-12"
+              />
+            </div>
+            <div class="w-3/5 flex flex-col gap-3">
+              <h3 class="text-xl font-bold text-left text-gray-100">
+                乐鱼体育
+              </h3>
+              <a
+                href="#"
+                target="_blank"
+                class="web-link text-center btn-gradient-blue font-medium py-2 px-4"
+                >点击进入网页 →</a
+              >
+              <a
+                href="#"
+                target="_blank"
+                class="app-link text-center btn-gradient-green font-medium py-2 px-4"
+                >全站APP下载 →</a
+              >
+            </div>
+          </div>
+          <div class="marquee-container mt-3 text-gray-400 text-xs">
+            <p class="animate-marquee">
+              全体育APP 业内最高赔率-覆盖世界各地赛事-全球首家一体化娱乐APP
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3: Huati Sports -->
+        <div data-link-key="hth" class="card-shadow p-4 flex flex-col">
+          <div class="flex items-center gap-4 flex-grow">
+            <div
+              class="bg-black rounded-lg p-2 w-2/5 flex justify-center items-center self-stretch shadow-inner"
+            >
+              <img
+                src="/img/hthlogo.png"
+                alt="Huati Logo"
+                class="h-14"
+              />
+            </div>
+            <div class="w-3/5 flex flex-col gap-3">
+              <h3 class="text-xl font-bold text-left text-gray-100">
+                华体会体育
+              </h3>
+              <a
+                href="#"
+                target="_blank"
+                class="web-link text-center btn-gradient-blue font-medium py-2 px-4"
+                >点击进入网页 →</a
+              >
+              <a
+                href="#"
+                target="_blank"
+                class="app-link text-center btn-gradient-green font-medium py-2 px-4"
+                >全站APP下载 →</a
+              >
+            </div>
+          </div>
+          <div class="marquee-container mt-3 text-gray-400 text-xs">
+            <p class="animate-marquee">
+              业内最高赔率，覆盖世界各地赛事，让球、大小、半全场
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 4: Jiuyou Sports -->
+        <div data-link-key="jiuyou" class="card-shadow p-4 flex flex-col">
+          <div class="flex items-center gap-4 flex-grow">
+            <div
+              class="bg-black rounded-lg p-2 w-2/5 flex justify-center items-center self-stretch shadow-inner"
+            >
+              <img
+                src="/img/jiuyoulogo.png"
+                alt="Jiuyou Logo"
+                class="h-14"
+              />
+            </div>
+            <div class="w-3/5 flex flex-col gap-3">
+              <h3 class="text-xl font-bold text-left text-gray-100">
+                九游体育
+              </h3>
+              <a
+                href="#"
+                target="_blank"
+                class="web-link text-center btn-gradient-blue font-medium py-2 px-4"
+                >点击进入网页 →</a
+              >
+              <a
+                href="#"
+                target="_blank"
+                class="app-link text-center btn-gradient-green font-medium py-2 px-4"
+                >全站APP下载 →</a
+              >
+            </div>
+          </div>
+          <div class="marquee-container mt-3 text-gray-400 text-xs">
+            <p class="animate-marquee">
+              电子、真人、体育、电竞顶尖赛事等您体验扫码下载，即刻拥有！
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="text-center pt-8">
+        <p class="text-lg font-semibold text-gray-400">
+          满冠 | 开云 | 华体会 | 九游娱乐 | 乐鱼
+        </p>
+        <p class="text-gray-500 mt-2 text-sm">
+          您想要的我们都有,带您丰富游戏体验
+        </p>
+        <p class="text-xs text-gray-500 mt-6">
+          Copyright ©2025-2026 满冠体育. All rights reserved.
+        </p>
+      </footer>
+    </div>
+    <script src="links.js"></script>
+    <script>
+      // Script để tạo hiệu ứng bong bóng
+      const bubbleContainer = document.getElementById("background-bubbles");
+      if (bubbleContainer) {
+        const numBubbles = 25;
+
+        for (let i = 0; i < numBubbles; i++) {
+          const bubble = document.createElement("div");
+          bubble.classList.add("bubble");
+
+          const size = Math.random() * 80 + 20;
+          bubble.style.width = `${size}px`;
+          bubble.style.height = `${size}px`;
+          bubble.style.left = `${Math.random() * 100}%`;
+
+          const duration = Math.random() * 20 + 15;
+          const delay = Math.random() * 15;
+          bubble.style.animationDuration = `${duration}s`;
+          bubble.style.animationDelay = `${delay}s`;
+
+          bubbleContainer.appendChild(bubble);
+        }
+      }
+
+      // Script cho Slider và Links
+      document.addEventListener("DOMContentLoaded", function () {
+        // =================== DYNAMIC LINKS ===================
+
+        function applyDynamicLinks() {
+          const isMobile = /iPhone|iPad|iPod|Android/i.test(
+            navigator.userAgent
+          );
+          document.querySelectorAll("[data-link-key]").forEach((container) => {
+            const key = container.dataset.linkKey;
+            const linkData = window.links[key];
+            if (!linkData) return;
+
+            const webButton = container.querySelector(".web-link");
+            const appButton = container.querySelector(".app-link");
+
+            if (webButton) {
+              webButton.href = isMobile ? linkData.m_link : linkData.link;
+            }
+            if (appButton) {
+              appButton.href = linkData.app_link;
+            }
+          });
+        }
+
+        // =================== SLIDER ===================
+        const slides = [
+          { src: "/img/banners/3.jpg" },
+          { src: "/img/banners/4.jpg" },
+          { src: "/img/banners/5.jpg" }
+        ];
+
+        let currentSlide = 0;
+        const sliderImage = document.getElementById("slider-image");
+        const sliderDotsContainer = document.getElementById("slider-dots");
+        const prevButton = document.getElementById("prev-slide");
+        const nextButton = document.getElementById("next-slide");
+        let slideInterval;
+
+        function showSlide(index) {
+          if (!sliderImage) return;
+          sliderImage.style.opacity = "0";
+          setTimeout(() => {
+            sliderImage.src = slides[index].src;
+            sliderImage.style.opacity = "1";
+            document
+              .querySelectorAll(".slider-dot")
+              .forEach((dot, dotIndex) => {
+                dot.classList.toggle("bg-white", dotIndex === index);
+                dot.classList.toggle("bg-white/50", dotIndex !== index);
+              });
+            currentSlide = index;
+          }, 500);
+        }
+
+        function nextSlide() {
+          const newIndex = (currentSlide + 1) % slides.length;
+          showSlide(newIndex);
+        }
+
+        function prevSlide() {
+          const newIndex = (currentSlide - 1 + slides.length) % slides.length;
+          showSlide(newIndex);
+        }
+
+        function startSlideShow() {
+          slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopSlideShow() {
+          clearInterval(slideInterval);
+        }
+
+        if (sliderImage) {
+          slides.forEach((_, index) => {
+            const dot = document.createElement("button");
+            dot.classList.add(
+              "slider-dot",
+              "w-2.5",
+              "h-2.5",
+              "rounded-full",
+              "transition-colors"
+            );
+            dot.addEventListener("click", () => showSlide(index));
+            sliderDotsContainer.appendChild(dot);
+          });
+
+          prevButton.addEventListener("click", prevSlide);
+          nextButton.addEventListener("click", nextSlide);
+
+          document
+            .getElementById("slider-container")
+            .addEventListener("mouseenter", stopSlideShow);
+          document
+            .getElementById("slider-container")
+            .addEventListener("mouseleave", startSlideShow);
+
+          showSlide(0);
+          startSlideShow();
+        }
+
+        // Khởi chạy tất cả các hàm
+        applyDynamicLinks();
+      });
+    </script>
+  </body>
+</html>
